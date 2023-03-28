@@ -3,18 +3,18 @@
 /**
  * get_flags - Calculates active flags
  * @format: Formatted string in which to print the arguments
- * @i: take a parameter.
+ * @k: take a parameter.
  * Return: Flags:
  */
 
-int get_flags(const char *format, int *i)
+int get_flags(const char *format, int *k)
 
 {
 	/* - + 0 # ' ' */
 
 	/* 1 2 4 8  16 */
 
-	int j, curr_i;
+	int j, curr_k;
 
 	int flags = 0;
 
@@ -22,12 +22,12 @@ int get_flags(const char *format, int *i)
 
 	const int FLAGS_ARR[] = {F_MINUS, F_PLUS, F_ZERO, F_HASH, F_SPACE, 0};
 
-	for (curr_i = *i + 1; format[curr_i] != '\0'; curr_i++)
+	for (curr_k = *k + 1; format[curr_k] != '\0'; curr_k++)
 
 	{
 		for (j = 0; FLAGS_CH[j] != '\0'; j++)
 
-			if (format[curr_i] == FLAGS_CH[j])
+			if (format[curr_k] == FLAGS_CH[j])
 
 			{
 				flags |= FLAGS_ARR[j];
@@ -40,7 +40,7 @@ int get_flags(const char *format, int *i)
 			break;
 	}
 
-	*i = curr_i - 1;
+	*k = curr_k - 1;
 
 	return (flags);
 }

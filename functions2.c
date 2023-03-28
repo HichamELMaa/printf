@@ -66,7 +66,7 @@ int print_pointer(va_list types, char buffer[],
 int print_non_printable(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	int i = 0, offset = 0;
+	int j = 0, offset = 0;
 	char *str = va_arg(types, char *);
 
 	UNUSED(flags);
@@ -77,19 +77,19 @@ int print_non_printable(va_list types, char buffer[],
 	if (str == NULL)
 		return (write(1, "(null)", 6));
 
-	while (str[i] != '\0')
+	while (str[j] != '\0')
 	{
-		if (is_printable(str[i]))
-			buffer[i + offset] = str[i];
+		if (is_printable(str[j]))
+			buffer[j + offset] = str[j];
 		else
-			offset += append_hexa_code(str[i], buffer, i + offset);
+			offset += append_hexa_code(str[j], buffer, j + offset);
 
-		i++;
+		j++;
 	}
 
-	buffer[i + offset] = '\0';
+	buffer[j + offset] = '\0';
 
-	return (write(1, buffer, i + offset));
+	return (write(1, buffer, j + offset));
 }
 
 /************************* PRINT REVERSE *************************/
@@ -108,7 +108,7 @@ int print_reverse(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	char *str;
-	int i, count = 0;
+	int j, count = 0;
 
 	UNUSED(buffer);
 	UNUSED(flags);
@@ -123,12 +123,12 @@ int print_reverse(va_list types, char buffer[],
 
 		str = ")Null(";
 	}
-	for (i = 0; str[i]; i++)
+	for (j = 0; str[j]; j++)
 		;
 
-	for (i = i - 1; i >= 0; i--)
+	for (j = j - 1; j >= 0; j--)
 	{
-		char z = str[i];
+		char z = str[j];
 
 		write(1, &z, 1);
 		count++;
